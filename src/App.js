@@ -42,14 +42,18 @@ class App extends Component {
           images: [...prevState.images, ...hits],
           currentPage: prevState.currentPage + 1,
         }));
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
+        if (currentPage !== 1) {
+          console.log(currentPage);
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth",
+          });
+        }
       })
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isLoading: false }));
   };
+
   openModal = (event) => {
     if (event.target.nodeName === "IMG") {
       console.log(event.target.dataset.url);
